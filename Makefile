@@ -11,8 +11,11 @@ BUILD_DIR ?= $(PROJECT_HOME_DIR)/Build
 
 TARGET = $(BUILD_DIR)/$(TARGET_NAME)
 
-# ARM Compiler for BBB
-CC = arm-linux-gnueabihf-gcc-7
+ifdef arm
+	CC = arm-linux-gnueabihf-gcc-7
+else
+	CC = gcc
+endif
 
 # Source files
 SOURCE = $(wildcard $(PROJECT_HOME_DIR)/*.c)
