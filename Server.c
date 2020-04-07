@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     perror("[-] ERROR: Could not accept connection");
   }
 
-  printf("[+] Connected\n\n");
+  printf("[+] Connected...\n\n");
 
   int MAX_SIZE = 100;
   char read_buffer[MAX_SIZE];
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     printf("From client: %s\t To client : ", read_buffer);
     bzero(read_buffer, MAX_SIZE);
 
-  //  // copy server message in the buffer 
+    // copy server message in the buffer 
     while ((read_buffer[n++] = getchar()) != '\n');
 
     // // and send that buffer to client
