@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+#define PORT 5050
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
   //Prepare the sockaddr_in structure
   server.sin_family = AF_INET;
   server.sin_addr.s_addr = INADDR_ANY;
-  server.sin_port = htons( 5050 );
+  server.sin_port = htons( PORT );
 
   if( bind(socket_file_descriptor,(struct sockaddr *)&server , sizeof(server)) < 0)
   {
@@ -41,7 +42,7 @@ int main(int argc, char *argv[])
       socket_file_descriptor,
       (struct sockaddr *)&client,
       &client_length);
-  
+
   if(new_socket < 0)
   {
     perror("[-] ERROR: Could not accept connection");
