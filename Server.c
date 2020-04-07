@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+
 #define PORT 5050
 
 int main(int argc, char *argv[])
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
     perror("[-] ERROR: Could not accept connection");
   }
 
-  puts("[+] Conected");
+  printf("[+] Connected\n\n");
 
   int MAX_SIZE = 100;
   char read_buffer[MAX_SIZE];
@@ -57,32 +58,32 @@ int main(int argc, char *argv[])
   {
     int n = read(new_socket, read_buffer, sizeof(read_buffer));
     if (n < 0){
-      perror("Socket Server: error reading from server socket.");
+      perror("[-] ERROR: error reading from server socket.");
     }
-    // read the message from client and copy it in buffer 
-    // read(socket_file_descriptor, read_buffer, sizeof(read_buffer)); 
+    // read the message from client and copy it in buffer
+    // read(socket_file_descriptor, read_buffer, sizeof(read_buffer));
 
-    // print buffer which contains the client contents 
-    printf("From client: %s\t To client : ", read_buffer); 
-    bzero(read_buffer, MAX_SIZE); 
+    // print buffer which contains the client contents
+    printf("From client: %s\t To client : ", read_buffer);
+    bzero(read_buffer, MAX_SIZE);
 
   //  // copy server message in the buffer 
-    while ((read_buffer[n++] = getchar()) != '\n'); 
+    while ((read_buffer[n++] = getchar()) != '\n');
 
-    // // and send that buffer to client 
-    write(new_socket, read_buffer, sizeof(read_buffer)); 
+    // // and send that buffer to client
+    write(new_socket, read_buffer, sizeof(read_buffer));
 
     printf("Client sent: %s\n", read_buffer);
 
-    // if msg contains "Exit" then server exit and chat ended. 
-    if (strncmp("exit", read_buffer, 4) == 0) { 
-      printf("Server Exit...\n"); 
-      break; 
-    } 
+    // if msg contains "Exit" then server exit and chat ended.
+    if (strncmp("exit", read_buffer, 4) == 0) {
+      printf("Server Exit...\n");
+      break;
+    }
   }
 
-  // After chatting close the socket 
-  close(socket_file_descriptor); 
+  // After chatting close the socket
+  close(socket_file_descriptor);
 
   return 0;
 }
